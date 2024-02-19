@@ -17,33 +17,19 @@ public class JobServiceImpl implements JobService {
         this.jobRepository = jobRepository;
     }
 
-    private Long nextId = 1L;
-
     @Override
     public List<Job> findAll() {
         return jobRepository.findAll();
     }
 
     @Override
-    public String createJob(@RequestBody Job job) {
-        job.setId(nextId++);
-        jobRepository.save(job);
-        return "Job created successfully!";
+    public Job createJob(@RequestBody Job job) {
+        return jobRepository.save(job);
     }
 
     @Override
     public Job findById(int id) {
         return jobRepository.findById((long) id).orElse(null);
-    }
-
-    @Override
-    public boolean deleteJobById(int id) {
-        try {
-            jobRepository.deleteById((long) id);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
     }
 
     @Override
@@ -60,5 +46,15 @@ public class JobServiceImpl implements JobService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean deleteJobById(int id) {
+        try {
+            jobRepository.deleteById((long) id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

@@ -17,7 +17,7 @@ public class JobController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Job>> findAll() {
+    public ResponseEntity<List<Job>> getAllJobs() {
         return ResponseEntity.ok(jobService.findAll());
     }
 
@@ -32,9 +32,8 @@ public class JobController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createJob(@RequestBody Job job) {
-        jobService.createJob(job);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Job created successfully.");
+    public ResponseEntity<Job> createJob(@RequestBody Job job) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(jobService.createJob(job));
     }
 
     @PutMapping("/{id}")

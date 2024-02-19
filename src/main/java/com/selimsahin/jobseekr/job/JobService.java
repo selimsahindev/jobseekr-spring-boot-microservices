@@ -4,9 +4,8 @@ import java.util.List;
 
 public interface JobService {
     List<Job> findAll();
-    String createJob(Job job);
     Job findById(int id);
-
-    boolean deleteJobById(int id);
+    Job createJob(Job job);
     boolean updateJob(int id, Job job);
+    boolean deleteJobById(int id);
 }
